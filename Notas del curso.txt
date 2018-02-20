@@ -1,0 +1,65 @@
+/*Creacion del archivo .dockerignore*/
+
+Este se utiliza para excluir los archivos que deben ser ignorados al momento de hacer deploy.
+
+/*Creacion del Dockerfile*/
+
+Configuracion para ahcer deploy de nuestro package
+
+*FROM  
+Se utiliza para indicar desde donde queremos hacer referencia a nuestro paquete 
+
+*EXPOSE
+Comando para indicar en que puerto va a correr.
+
+*WORKDIR
+Indica el directorio desde donde va a correr la app.
+
+*ADD 
+Para añadir archivos desde la maquina local al package
+
+-> ADD [directorio o archivos de la maquina local] [ruta del directorio a la maquina en la nube]
+
+*RUN    
+Se utiliza para correr comandos como lo hariamos desde una linea de comandos en la maquina local
+
+*CMD 
+Para ejecutar comandos 
+
+-> CMD ["comando", "parametro o bandera"]
+
+/*crear contenedor*/
+
+*docker build -t [nombre o tag] [ubicacion del Dockerfile]
+
+/*correr el package*/
+
+*docker run -p[puerto de maquina local]:[puerto de maquina en la nube] [nombre o tag del package]
+
+*docker run -d -p[puerto de maquina local]:[puerto de maquina en la nube] [nombre o tag del package]
+
+
+*docker ps 
+Muestra los procesos de los contenedores que tengamos corriendo
+
+*docker kill [id del package]
+Sirve para detener un package que se encuentra ejecutando.
+
+*docker run [package] [comando a ejecutar]
+Funciona para ejecutar comandos especificos dentro del package sin tener que modificar el Dockerfile
+
+/*Continuos Integration*/
+
+Se trata de pruebas automatizadas luego de realizar un cambio en el codigo y verifica si el codigo es estable 
+o no.
+
+/*Circle CI*/
+
+ 
+
+
+
+
+
+
+
