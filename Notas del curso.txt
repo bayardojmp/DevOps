@@ -121,3 +121,4 @@ qa.sh:
     echo "corriendo prueba de aceptacion en $URL"
     curl --silent -L $URL --> Indica que visite la direccion que representa la variable $URL con --silent indica que muestre error o correcto y -L indica que siga toda la ruta hasta el url final
 
+6. crear el nuevo branch(rama) con el formato de feature_/* para agregar los cambios, 
