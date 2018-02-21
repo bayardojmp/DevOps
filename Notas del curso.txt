@@ -55,11 +55,61 @@ o no.
 
 /*Circle CI*/
 
- 
+ circleci.yml
+
+machine:
+ services:
+  - docker
+
+ dependencies:
+  override:
+    - docker build -t prueba .
+ test:
+  override:
+    - docker run prueba npm test
+
+/*Continuous Delivery*/
+¿Qué es Continuous Delivery?
+
+Cuando incluimos CI en nuestro proceso, nos aseguramos que nuestro código siempre esté bien 
+probado y sea posible enviarlo a producción con pocas preocupaciones. 
+Este estado es la definición de Continuous Delivery. El código no necesariamente tiene que terminar 
+en producción, pero el hecho de que podamos deploy con confianza basado en nuestro proceso de CI, 
+nos pone en una posición muy cómoda. En el caso que veamos un problema en producción, 
+podemos escoger una versión anterior con certeza de que no traerá problemas.
+
+Lanzar el código directo a producción después que los cambios fueron aceptados por el proceso de CI
+ es conocido como Continuous Deployment. Para llegar a este nivel, los niveles de prueba deben 
+ ser excelentes. Tener un ambiente de QA con pruebas de aceptación sería crucial para prevenir 
+ errores en las partes más críticas del servicio.
 
 
+Creando Nuestro Ambiente de Control de Calidad (Quality Assurance) con Now.sh 
+/*now -L*/
+Agregar nuestras credenciales de Now
 
+/*npm i -g --unsafe-perm now*/
+Instalar now.sh como variable global de nuestro proyecto 
 
+/*now --docker*/
+Hacer deploy de nuestro package de docker hacia now.sh
 
+/*Conectando los deploy de now con circleci*/
 
+1. Ingresar a nuestro perfil de now.sh
+2. Crear un API token con el nombre de nestro repositorio de circleci (el mismo nombre del repositorio e github)
+3. En circleci agregar en token el la opcion de Environment Variables 
+4. modificar el archivo circle.yml agregando la instalacion de node para que con esto ejecutar
+el comando que instalar now.sh
 
+machine:
+ node:
+  version: 8.9.4 
+
+5. Agregando la opcion de Deployment en el archivo circle.yml
+
+deployment:
+  qa:
+    branch: /feature_.*/  --> indicamos que tipo de brach (rama) queremos que tome en cuenta al hacer deploy
+    commands: 
+      sh deployments/qa.sh --> Indicando el comando o script a ejecutar, en este caso es un script del cual se indica la ubicacion exacta
